@@ -9,11 +9,24 @@ yarn install
 yarn dev
 ```
 
+### Live (Vercel)
+
+- **Production:** https://vanilla-threejs-project-main.vercel.app
+- **Demo for Toph:** https://vanilla-threejs-project-main.vercel.app/?demo=1
+
+Repo: https://github.com/Morgen33/tophs-tissue-box
+
+### Local dev
+
+```bash
+yarn dev
+```
+
 Open **http://localhost:3002/** (port set in `vite.config.ts`).
 
-### Demo for Toph (no email, unlimited pulls)
+### Demo mode (no email, unlimited pulls)
 
-**http://localhost:3002/?demo=1**
+Add `?demo=1` to either URL above, or locally: **http://localhost:3002/?demo=1**
 
 - Skips email
 - Pull as many times as you want
