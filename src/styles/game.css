@@ -1,0 +1,465 @@
+/* Frame layout — UI around the box, center stays clear for Three.js */
+
+#game-ui {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+  display: grid;
+  grid-template-columns: minmax(130px, 11vw) 1fr minmax(100px, 9vw);
+  grid-template-rows: auto 1fr auto;
+  grid-template-areas:
+    'top top top'
+    'left stage right'
+    'bottom bottom bottom';
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  color: #f2ebe0;
+}
+
+/* Top headline band */
+.ui-top {
+  grid-area: top;
+  pointer-events: auto;
+  text-align: center;
+  padding: 16px 20px 12px;
+  background: linear-gradient(
+    180deg,
+    rgba(12, 10, 8, 0.92) 0%,
+    rgba(12, 10, 8, 0.55) 70%,
+    transparent 100%
+  );
+}
+
+.demo-badge {
+  display: inline-block;
+  margin-bottom: 8px;
+  padding: 6px 14px;
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #142218;
+  background: linear-gradient(180deg, #ffe566 0%, #ffb347 100%);
+  box-shadow: 0 0 20px rgba(255, 200, 80, 0.35);
+}
+
+.game-kicker {
+  font-size: 10px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #9fd4a0;
+  margin-bottom: 4px;
+}
+
+.game-title {
+  font-size: clamp(1.25rem, 3.5vw, 2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  color: #fff6d8;
+  text-shadow: 0 2px 20px rgba(0, 0, 0, 0.5);
+}
+
+.game-sub {
+  font-size: clamp(0.75rem, 1.8vw, 0.9rem);
+  line-height: 1.4;
+  color: rgba(242, 235, 224, 0.7);
+  margin-top: 6px;
+  max-width: 520px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Side columns — stats left, hint right */
+.ui-side {
+  pointer-events: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 12px;
+}
+
+.ui-side-left {
+  grid-area: left;
+  align-items: stretch;
+  background: linear-gradient(
+    90deg,
+    rgba(12, 10, 8, 0.88) 0%,
+    rgba(12, 10, 8, 0.35) 80%,
+    transparent 100%
+  );
+}
+
+.ui-side-right {
+  grid-area: right;
+  align-items: flex-end;
+  text-align: right;
+  background: linear-gradient(
+    270deg,
+    rgba(12, 10, 8, 0.75) 0%,
+    transparent 100%
+  );
+}
+
+.ui-stage {
+  grid-area: stage;
+  pointer-events: none;
+}
+
+.game-stats {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.stat {
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 12px 14px;
+  backdrop-filter: blur(6px);
+}
+
+.stat-rare {
+  border-color: rgba(255, 213, 74, 0.4);
+  box-shadow: 0 0 24px rgba(255, 213, 74, 0.08);
+}
+
+.stat-n {
+  display: block;
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  font-weight: 800;
+  color: #fff6d8;
+  line-height: 1;
+}
+
+.stat-rare .stat-n {
+  color: #ffd54a;
+}
+
+.stat-l {
+  display: block;
+  margin-top: 4px;
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: rgba(242, 235, 224, 0.5);
+}
+
+.side-hint {
+  font-size: 0.7rem;
+  color: rgba(242, 235, 224, 0.4);
+  margin-bottom: 12px;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  transform: rotate(180deg);
+}
+
+.game-mock-tag {
+  font-size: 0.6rem;
+  color: rgba(242, 235, 224, 0.3);
+  line-height: 1.35;
+}
+
+/* Bottom dock — email, pull, results */
+.ui-bottom {
+  grid-area: bottom;
+  pointer-events: auto;
+  padding: 0 16px 18px;
+  background: linear-gradient(
+    0deg,
+    rgba(12, 10, 8, 0.95) 0%,
+    rgba(12, 10, 8, 0.6) 55%,
+    transparent 100%
+  );
+}
+
+.ui-bottom-card {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 14px 18px;
+  border-radius: 16px;
+  background: rgba(0, 0, 0, 0.5);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.game-panel.hidden {
+  display: none;
+}
+
+.gate-row {
+  display: flex;
+  gap: 12px;
+  align-items: flex-end;
+}
+
+.gate-field {
+  flex: 1;
+  min-width: 0;
+}
+
+.field-label {
+  display: block;
+  font-size: 0.72rem;
+  margin-bottom: 4px;
+  color: rgba(242, 235, 224, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+
+.field-input {
+  width: 100%;
+  padding: 11px 14px;
+  border-radius: 10px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(0, 0, 0, 0.5);
+  color: #fff;
+  font-size: 1rem;
+}
+
+.field-input:focus {
+  outline: none;
+  border-color: #9fd4a0;
+}
+
+.field-input.invalid {
+  border-color: #e85d5d;
+}
+
+.field-input:disabled {
+  opacity: 0.55;
+}
+
+.field-note {
+  font-size: 0.72rem;
+  color: rgba(242, 235, 224, 0.45);
+  margin-top: 8px;
+  text-align: center;
+}
+
+.btn {
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  font-size: 0.95rem;
+  font-weight: 700;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: transform 0.12s, opacity 0.12s;
+  flex-shrink: 0;
+}
+
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.btn:not(:disabled):active {
+  transform: scale(0.97);
+}
+
+.btn-primary {
+  background: linear-gradient(180deg, #b8f5c8 0%, #6bc98a 100%);
+  color: #142218;
+  min-width: 140px;
+}
+
+.btn-wallet {
+  background: linear-gradient(180deg, #7eb8ff 0%, #4a7fd4 100%);
+  color: #0e1420;
+  width: 100%;
+}
+
+.btn-share {
+  background: rgba(255, 255, 255, 0.08);
+  color: #f2ebe0;
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  width: 100%;
+}
+
+.btn-again {
+  background: linear-gradient(180deg, #ffe566 0%, #e8a830 100%);
+  color: #1a1408;
+  width: 100%;
+}
+
+.ui-bottom-card [data-panel='sold-out'] .btn-primary {
+  margin-top: 12px;
+  width: 100%;
+}
+
+.pulling-text {
+  text-align: center;
+  font-size: 1rem;
+  color: #9fd4a0;
+  animation: pulse 1s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.result-row {
+  display: flex;
+  gap: 16px;
+  align-items: flex-start;
+}
+
+.result-copy {
+  flex: 1;
+  min-width: 0;
+}
+
+.result-actions {
+  flex-shrink: 0;
+  width: min(200px, 40%);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.result-badge {
+  display: inline-block;
+  font-size: 0.65rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  padding: 4px 8px;
+  border-radius: 6px;
+  margin-bottom: 6px;
+}
+
+.badge-free_booger {
+  background: rgba(107, 201, 138, 0.35);
+  color: #b8f5c8;
+}
+
+.badge-snotlist {
+  background: rgba(126, 184, 255, 0.3);
+  color: #a8d4ff;
+}
+
+.badge-golden_tissue {
+  background: rgba(255, 213, 74, 0.35);
+  color: #ffd54a;
+}
+
+.badge-empty_tissue {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(242, 235, 224, 0.55);
+}
+
+.result-title {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  font-weight: 800;
+  line-height: 1.2;
+  color: #fff6d8;
+  margin-bottom: 4px;
+}
+
+.result-follow {
+  font-size: 0.82rem;
+  line-height: 1.45;
+  color: rgba(242, 235, 224, 0.7);
+}
+
+.wallet-block.hidden,
+.claim-done.hidden,
+.share-feedback.hidden {
+  display: none;
+}
+
+.wallet-note {
+  font-size: 0.65rem;
+  color: rgba(242, 235, 224, 0.4);
+  text-align: center;
+}
+
+.claim-done {
+  font-size: 0.78rem;
+  color: #9fd4a0;
+  text-align: center;
+}
+
+.share-feedback {
+  font-size: 0.72rem;
+  color: #9fd4a0;
+  text-align: center;
+}
+
+/* Mobile — stats row on top sides, box gets vertical center */
+@media (max-width: 768px) {
+  #game-ui {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto 1fr auto;
+    grid-template-areas:
+      'top top'
+      'left right'
+      'stage stage'
+      'bottom bottom';
+  }
+
+  .ui-top {
+    padding: 12px 14px 8px;
+  }
+
+  .ui-side {
+    padding: 8px 10px;
+    justify-content: flex-start;
+  }
+
+  .ui-side-left,
+  .ui-side-right {
+    background: rgba(12, 10, 8, 0.75);
+  }
+
+  .game-stats {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+
+  .stat {
+    flex: 1 1 45%;
+    padding: 8px 10px;
+  }
+
+  .stat-rare {
+    flex: 1 1 100%;
+  }
+
+  .stat-n {
+    font-size: 1.1rem;
+  }
+
+  .side-hint {
+    writing-mode: horizontal-tb;
+    transform: none;
+    font-size: 0.65rem;
+  }
+
+  .ui-stage {
+    min-height: 38vh;
+  }
+
+  .gate-row {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-primary {
+    width: 100%;
+    min-width: unset;
+  }
+
+  .result-row {
+    flex-direction: column;
+  }
+
+  .result-actions {
+    width: 100%;
+  }
+}
